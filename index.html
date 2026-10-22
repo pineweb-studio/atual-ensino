@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Atual Sistema de Ensino</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Atual Sistema de Ensino, em Sabinópolis (MG). Ensino Médio com material Bernoulli, professores próximos e alunos de toda a região. Matrículas abertas para 2027.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap">
+<style>
+/* Layout: caderno quadriculado nas cores da ATUAL (amarelo e preto). Margem do caderno, marca-texto e polaroids.
+   No modo escuro o papel vira lousa. */
+:root {
+  --papel: #FFFDF6;
+  --papel-2: #FFF5D1;
+  --tinta: #151515;
+  --tinta-2: #57534A;
+  --caneta: #151515;
+  --caneta-txt: #FFC414;
+  --marca: #FFC414;
+  --coral: #A86E00;
+  --linha: rgba(21, 21, 21, .06);
+  --borda: rgba(21, 21, 21, .16);
+  --foto: #F3EBD2;
+  --nota: #FFE27A;
+  --sombra: 0 10px 30px -12px rgba(21, 21, 21, .35);
+  --sobre-marca: #151515;
+  --f-display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --f-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mao: "Caveat", "Segoe Print", "Comic Sans MS", cursive;
+  --raio: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --papel: #121210; --papel-2: #1D1B13; --tinta: #F5F2E8; --tinta-2: #BAB5A6;
+    --caneta: #FFC414; --caneta-txt: #151515; --marca: #FFC414; --coral: #FFC414;
+    --linha: rgba(255, 255, 255, .05); --borda: rgba(245, 242, 232, .17);
+    --foto: #2A271C; --nota: #3B3416; --sombra: 0 10px 30px -12px rgba(0, 0, 0, .6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --papel: #121210; --papel-2: #1D1B13; --tinta: #F5F2E8; --tinta-2: #BAB5A6;
+    --caneta: #FFC414; --caneta-txt: #151515; --marca: #FFC414; --coral: #FFC414;
+    --linha: rgba(255, 255, 255, .05); --borda: rgba(245, 242, 232, .17);
+    --foto: #2A271C; --nota: #3B3416; --sombra: 0 10px 30px -12px rgba(0, 0, 0, .6);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background-color: var(--papel);
+  background-image:
+    linear-gradient(var(--linha) 1px, transparent 1px),
+    linear-gradient(90deg, var(--linha) 1px, transparent 1px);
+  background-size: 28px 28px;
+  color: var(--tinta);
+  font: 400 17px/1.6 var(--f-body);
+  overflow-x: hidden;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--papel);
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; border-radius: 6px; }
+
+.wrap {
+  max-width: 1160px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+section { padding-block: clamp(56px, 9vw, 110px); }
+
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -.02em; }
+h2 { font-size: clamp(2rem, 4.6vw, 3.4rem); font-weight: 800; }
+h3 { font-size: 1.3rem; font-weight: 700; }
+p { margin: 0; }
+.mao { font-family: var(--f-mao); font-weight: 700; color: var(--coral); font-size: 1.5rem; line-height: 1.1; }
+.olho { font: 700 .78rem/1 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--caneta); }
+.lead { color: var(--tinta-2); font-size: 1.15rem; max-width: 56ch; }
+.cab { display: grid; gap: 14px; margin-bottom: clamp(32px, 5vw, 56px); max-width: 760px; }
+
+/* marca-texto */
+.marca {
+  position: relative; color: var(--sobre-marca); padding-inline: .08em; -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  background: linear-gradient(100deg, transparent 1%, var(--marca) 2%, var(--marca) 97%, transparent 98%) no-repeat 0 82% / 0% 62%;
+  animation: risca 1s .35s cubic-bezier(.65, 0, .35, 1) forwards;
+}
+@keyframes risca { to { background-size: 100% 62%; } }
+
+/* botões */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer;
+  font: 700 1rem/1 var(--f-body); padding: 16px 22px; border-radius: 999px; border: 2px solid var(--tinta);
+  background: var(--tinta); color: var(--papel); transition: transform .2s, box-shadow .2s;
+  box-shadow: 4px 4px 0 var(--marca);
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--marca); }
+.btn.sec { background: transparent; color: var(--tinta); box-shadow: none; }
+.btn.sec:hover { background: var(--papel-2); }
+.btn svg { width: 20px; height: 20px; flex: none; }
+
+/* topo */
+.topo {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--papel) 88%, transparent);
+  backdrop-filter: blur(10px); border-bottom: 1px solid var(--borda);
+}
+.topo .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.logo { display: flex; align-items: baseline; gap: 10px; text-decoration: none; }
+.logo b { font: 800 1.6rem/1 var(--f-display); letter-spacing: .04em; padding: 4px 8px 2px; background: var(--marca); color: var(--sobre-marca); border-radius: 4px; }
+.logo span { font-size: .78rem; color: var(--tinta-2); line-height: 1.2; }
+.menu { display: flex; gap: 26px; }
+.menu a { text-decoration: none; font-weight: 600; font-size: .95rem; position: relative; }
+.menu a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -4px; height: 3px; background: var(--marca); transition: right .25s; }
+.menu a:hover::after { right: 0; }
+.topo .btn { padding: 11px 18px; font-size: .92rem; box-shadow: none; }
+.topo-acoes { display: flex; gap: 10px; align-items: center; }
+.topo .btn.aluno { border-color: var(--tinta); }
+.topo .btn.aluno svg { width: 18px; height: 18px; }
+@media (max-width: 520px) { .so-largo { display: none; } .aluno > span { text-transform: capitalize; } .topo .btn { padding: 10px 14px; } .topo-acoes { gap: 8px; } }
+@media (max-width: 900px) { .menu { display: none; } .logo span { display: none; } }
+.progresso { position: absolute; left: 0; bottom: -1px; height: 3px; width: 0; background: var(--coral); }
+
+/* hero */
+.hero { padding-block: clamp(40px, 7vw, 90px) clamp(48px, 7vw, 90px); }
+.hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
+.hero h1 { font-size: clamp(2.8rem, 7.2vw, 5.6rem); font-weight: 800; margin-block: 14px 22px; }
+.rot { display: inline-block; min-width: 5.2ch; }
+.rot .marca { animation: none; background-size: 100% 62%; white-space: nowrap; }
+.hero .acoes { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+.cidades { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+.cidades span { font-size: .85rem; font-weight: 600; padding: 6px 12px; border-radius: 999px; border: 1.5px dashed var(--borda); color: var(--tinta-2); }
+@media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; } }
+
+.colagem { position: relative; aspect-ratio: 1 / 1.02; max-width: 520px; width: 100%; margin-inline: auto; }
+.colagem .polaroid { position: absolute; transition: transform .4s cubic-bezier(.2, .8, .2, 1); }
+.colagem .p1 { width: 62%; left: 0; top: 4%; --r: -6deg; }
+.colagem .p2 { width: 54%; right: 0; top: 0; --r: 5deg; }
+.colagem .p3 { width: 58%; left: 14%; bottom: 0; --r: -2deg; }
+.colagem .nota-mao { position: absolute; right: 0; bottom: 6%; transform: rotate(-6deg); max-width: 6.5em; text-align: center; font-size: clamp(1.05rem, 2.6vw, 1.35rem); }
+
+/* polaroid / foto */
+.polaroid {
+  background: #FFFFFF; padding: 10px 10px 34px; border-radius: 4px; box-shadow: var(--sombra);
+  transform: rotate(var(--r, 0deg)); position: relative;
+}
+:root[data-theme="dark"] .polaroid { background: #F3F1EA; }
+.polaroid::before {
+  content: ""; position: absolute; top: -12px; left: 50%; width: 84px; height: 24px; transform: translateX(-50%) rotate(-3deg);
+  background: color-mix(in srgb, var(--marca) 70%, transparent); opacity: .85;
+}
+.polaroid figcaption { position: absolute; left: 0; right: 0; bottom: 6px; text-align: center; font: 700 1.15rem/1 var(--f-mao); color: #3A3628; }
+.foto {
+  aspect-ratio: 4 / 3.2; width: 100%; max-width: 100%; border-radius: 2px; overflow: hidden;
+  background: var(--img, none) center / cover no-repeat, repeating-linear-gradient(-45deg, #F1E7C8 0 12px, #FAF4E2 12px 24px);
+  display: grid; place-items: center; text-align: center;
+}
+.foto[style*="--img"] > .vazio { display: none; }
+.vazio { font: 600 .82rem/1.3 var(--f-body); color: #6B5F3A; padding: 10px; display: grid; gap: 6px; justify-items: center; }
+.vazio svg { width: 28px; height: 28px; opacity: .6; }
+
+/* faixa */
+.faixa { background: var(--caneta); color: var(--caneta-txt); overflow: hidden; padding-block: 18px; border-block: 2px solid var(--tinta); }
+.faixa .trilho { display: flex; gap: 48px; width: max-content; animation: corre 32s linear infinite; }
+.faixa span { font: 700 clamp(1.1rem, 2.4vw, 1.6rem)/1 var(--f-display); white-space: nowrap; display: flex; align-items: center; gap: 48px; }
+.faixa span::after { content: "✦"; color: var(--caneta-txt); opacity: .6; }
+@keyframes corre { to { transform: translateX(-50%); } }
+
+/* números */
+.numeros { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 2px solid var(--tinta); border-radius: var(--raio); background: var(--papel); overflow: hidden; }
+.num { padding: 28px 24px; border-right: 2px dashed var(--borda); display: grid; gap: 6px; align-content: start; }
+.num:last-child { border-right: 0; }
+.num strong { font: 800 clamp(2.6rem, 5vw, 3.8rem)/1 var(--f-display); letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.num strong small { font-size: .5em; color: var(--coral); }
+.num p { color: var(--tinta-2); font-size: .95rem; }
+.confirmar { justify-self: start; font: 700 .68rem/1 var(--f-body); letter-spacing: .08em; text-transform: uppercase; padding: 5px 8px; border-radius: 6px; background: var(--marca); color: var(--sobre-marca); }
+@media (max-width: 820px) {
+  .numeros { grid-template-columns: 1fr 1fr; }
+  .num:nth-child(2) { border-right: 0; }
+  .num:nth-child(-n+2) { border-bottom: 2px dashed var(--borda); }
+}
+
+/* por que (margem de caderno) */
+.caderno { position: relative; padding-left: clamp(28px, 6vw, 72px); }
+.caderno::before { content: ""; position: absolute; left: clamp(8px, 2.5vw, 30px); top: 0; bottom: 0; width: 2px; background: var(--coral); opacity: .7; }
+.motivos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; }
+.motivo { padding: 28px 28px 32px 0; border-top: 2px solid var(--tinta); display: grid; gap: 10px; align-content: start; min-width: 0; }
+.motivo:nth-child(odd) { padding-right: 40px; }
+.motivo:nth-child(even) { padding-left: 28px; border-left: 2px dashed var(--borda); }
+.motivo .ico { width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center; background: var(--marca); color: var(--sobre-marca); transition: transform .3s; }
+.motivo:hover .ico { transform: rotate(-8deg) scale(1.08); }
+.motivo .ico svg { width: 26px; height: 26px; }
+.motivo p { color: var(--tinta-2); }
+@media (max-width: 720px) {
+  .motivos { grid-template-columns: 1fr; }
+  .motivo:nth-child(even) { padding-left: 0; border-left: 0; }
+}
+
+/* transporte */
+.transp { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
+.mapa { background: var(--papel); border: 2px solid var(--tinta); border-radius: var(--raio); padding: 12px; box-shadow: 8px 8px 0 var(--caneta); }
+.mapa svg { width: 100%; height: auto; display: block; }
+.mapa .rota { fill: none; stroke: var(--borda); stroke-width: 4; stroke-dasharray: 2 10; stroke-linecap: round; transition: stroke .3s; }
+.mapa .rota.on { stroke: var(--coral); stroke-dasharray: 10 8; animation: anda 1s linear infinite; }
+@keyframes anda { to { stroke-dashoffset: -36; } }
+.mapa .pino circle { fill: var(--papel); stroke: var(--tinta); stroke-width: 3; transition: r .2s, fill .2s; }
+.mapa .pino.on circle { fill: var(--marca); }
+.mapa .pino text { font: 700 15px var(--f-body); fill: var(--tinta); }
+.mapa .pino { cursor: pointer; }
+.mapa .sede circle { fill: var(--coral); stroke: var(--tinta); stroke-width: 3; }
+.mapa .sede text { font: 800 17px var(--f-display); fill: var(--tinta); }
+.mapa .legenda { font: 700 20px var(--f-mao); fill: var(--tinta-2); }
+.lista-cid { display: grid; gap: 10px; margin-top: 24px; }
+.lista-cid button {
+  all: unset; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 14px 18px; border-radius: 12px; border: 2px solid var(--borda); font-weight: 700; transition: border-color .2s, background .2s;
+}
+.lista-cid button:hover { border-color: var(--tinta); }
+.lista-cid button[aria-pressed="true"] { border-color: var(--tinta); background: var(--marca); color: var(--sobre-marca); }
+.lista-cid button span { font-weight: 500; font-size: .88rem; opacity: .8; }
+.lista-cid button:focus-visible { outline: 3px solid var(--coral); }
+@media (max-width: 860px) { .transp { grid-template-columns: 1fr; } }
+
+/* quiz */
+.quiz-box { border: 2px solid var(--tinta); border-radius: 22px; background: var(--papel); overflow: hidden; display: grid; grid-template-columns: .8fr 1.2fr; box-shadow: var(--sombra); }
+.quiz-lado { background: var(--tinta); color: var(--papel); padding: clamp(28px, 4vw, 48px); display: grid; gap: 18px; align-content: start; }
+.quiz-lado h2 { color: var(--papel); font-size: clamp(1.9rem, 3.6vw, 2.8rem); }
+.quiz-lado p { opacity: .8; }
+.passos { display: flex; gap: 8px; margin-top: 8px; }
+.passos i { height: 6px; flex: 1; border-radius: 9px; background: color-mix(in srgb, var(--papel) 25%, transparent); transition: background .3s; }
+.passos i.on { background: var(--marca); }
+.quiz-corpo { padding: clamp(28px, 4vw, 48px); min-width: 0; }
+.pergunta h3 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); margin-bottom: 20px; }
+.opcoes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.opcoes button {
+  all: unset; cursor: pointer; padding: 18px; border-radius: 14px; border: 2px solid var(--borda); font-weight: 600; line-height: 1.3;
+  display: grid; gap: 6px; transition: transform .15s, border-color .15s, background .15s;
+}
+.opcoes button small { font-weight: 500; color: var(--tinta-2); font-size: .85rem; }
+.opcoes button:hover { border-color: var(--tinta); transform: translateY(-2px); }
+.opcoes button:focus-visible { outline: 3px solid var(--coral); }
+.resultado { display: grid; gap: 18px; }
+.resultado .cartao { background: var(--nota); border-radius: 6px; padding: 22px 24px; transform: rotate(-1deg); box-shadow: var(--sombra); }
+.resultado .cartao p + p { margin-top: 8px; }
+.resultado .acoes { display: flex; flex-wrap: wrap; gap: 12px; }
+.voltar { all: unset; cursor: pointer; font-weight: 600; color: var(--tinta-2); text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 860px) { .quiz-box { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .opcoes { grid-template-columns: 1fr; } }
+
+/* fotos */
+.galeria { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 40px); padding-top: 12px; }
+.galeria .polaroid:nth-child(3n+1) { --r: -2.5deg; }
+.galeria .polaroid:nth-child(3n+2) { --r: 1.5deg; margin-top: 24px; }
+.galeria .polaroid:nth-child(3n) { --r: -1deg; }
+.galeria .polaroid:hover { transform: rotate(0) scale(1.03); z-index: 2; }
+.galeria .polaroid { transition: transform .3s; }
+@media (max-width: 760px) { .galeria { grid-template-columns: 1fr 1fr; } .galeria .polaroid:nth-child(3n+2) { margin-top: 0; } }
+.insta { margin-top: 40px; display: flex; justify-content: center; }
+
+/* depoimentos */
+.notas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.post-it { background: var(--nota); padding: 26px 24px 22px; border-radius: 3px; box-shadow: var(--sombra); display: grid; gap: 14px; align-content: start; transform: rotate(var(--r, 0)); }
+.post-it:nth-child(1) { --r: -1.5deg; }
+.post-it:nth-child(2) { --r: 1deg; }
+.post-it:nth-child(3) { --r: -.5deg; }
+.post-it blockquote { margin: 0; font: 700 1.45rem/1.2 var(--f-mao); }
+.post-it cite { font-style: normal; font-size: .88rem; color: var(--tinta-2); }
+.aviso-ex { margin-top: 40px; font-size: .85rem; color: var(--tinta-2); }
+@media (max-width: 820px) { .notas { grid-template-columns: 1fr; } }
+
+/* frase */
+.frase { text-align: center; }
+.frase blockquote { margin: 0 auto; max-width: 22ch; font: 800 clamp(2rem, 5vw, 3.6rem)/1.1 var(--f-display); letter-spacing: -.03em; text-wrap: balance; }
+.frase cite { display: block; margin-top: 18px; font-style: normal; }
+
+/* contato */
+.contato { background: var(--caneta); color: var(--caneta-txt); border-block: 2px solid var(--tinta); }
+.contato h2 { color: var(--caneta-txt); }
+.contato .lead { color: var(--caneta-txt); opacity: .85; }
+.contato .olho { color: var(--caneta-txt); opacity: .75; }
+.canais { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-top: 40px; }
+.canal {
+  background: var(--papel); color: var(--tinta); border: 2px solid var(--tinta); border-radius: var(--raio); padding: 22px;
+  display: grid; gap: 6px; align-content: start; text-decoration: none; transition: transform .2s, box-shadow .2s; min-width: 0;
+}
+a.canal:hover { transform: translate(-3px, -3px); box-shadow: 6px 6px 0 var(--marca); }
+.canal small { font-weight: 700; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--tinta-2); }
+.canal strong { font: 700 1.2rem/1.25 var(--f-display); overflow-wrap: anywhere; }
+.canal span { font-size: .9rem; color: var(--tinta-2); }
+
+/* rodapé */
+footer { padding-block: 36px calc(36px + env(safe-area-inset-bottom, 0px)); font-size: .9rem; color: var(--tinta-2); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: center; }
+.pineweb { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 600; color: var(--tinta); padding: 8px 14px; border: 1.5px solid var(--borda); border-radius: 999px; transition: border-color .2s; }
+.pineweb:hover { border-color: #2E7D5B; }
+.pineweb svg { width: 18px; height: 18px; }
+
+/* whatsapp flutuante */
+.zap {
+  position: fixed; z-index: 30;
+  right: calc(18px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  display: grid; justify-items: end; gap: 10px;
+}
+.zap-btn { all: unset; cursor: pointer; width: 60px; height: 60px; border-radius: 50%; background: #25D366; color: #fff; display: grid; place-items: center; box-shadow: 0 10px 24px -6px rgba(0, 0, 0, .4); transition: transform .2s; }
+.zap-btn:hover { transform: scale(1.07); }
+.zap-btn:focus-visible { outline: 3px solid var(--coral); }
+.zap-btn svg { width: 32px; height: 32px; }
+.zap-menu { background: var(--papel); color: var(--tinta); border: 2px solid var(--tinta); border-radius: 16px; padding: 16px; display: grid; gap: 8px; width: min(280px, calc(100vw - 36px)); box-shadow: var(--sombra); }
+.zap-menu p { font-weight: 700; }
+.zap-menu a { display: flex; justify-content: space-between; gap: 10px; text-decoration: none; padding: 12px 14px; border-radius: 10px; background: var(--papel-2); font-weight: 600; }
+.zap-menu a:hover { background: var(--marca); color: var(--sobre-marca); }
+.zap-menu a span { font-weight: 500; font-size: .85rem; opacity: .75; }
+
+/* entrada suave (sem esconder conteúdo) */
+.sobe { transition: transform .8s cubic-bezier(.2, .8, .2, 1); }
+.js .sobe:not(.visto) { transform: translateY(26px); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition: none !important; scroll-behavior: auto !important; }
+  .faixa .trilho { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Atual Sistema de Ensino, início">
+      <b>ATUAL</b>
+      <span>Sistema de Ensino<br>Escola parceira Bernoulli</span>
+    </a>
+    <nav class="menu" aria-label="Seções">
+      <a href="#escola">A escola</a>
+      <a href="#transporte">Região</a>
+      <a href="#descubra">Descubra</a>
+      <a href="#fotos">Fotos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div class="topo-acoes">
+      <a class="btn sec aluno" href="https://atualensino.figma.site" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 4 2 9l10 5 10-5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>
+        <span><span class="so-largo">Área do </span>aluno</span>
+      </a>
+      <a class="btn" href="#contato">Agendar visita</a>
+    </div>
+  </div>
+  <div class="progresso" id="progresso"></div>
+</header>
+
+<main id="inicio">
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="mao">Matrículas abertas para 2027</p>
+      <h1>Educação que <span class="rot"><span class="marca" id="rot">transforma</span></span></h1>
+      <p class="lead">A melhor escola de Ensino Médio da região. Material Bernoulli, professores que acompanham cada aluno de perto e estudantes que vêm de Sabinópolis e das cidades vizinhas.</p>
+      <div class="acoes">
+        <a class="btn" href="#contato">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+          Agendar uma visita
+        </a>
+        <a class="btn sec" href="#descubra">Qual o caminho do seu filho?</a>
+      </div>
+      <div class="cidades" aria-label="Cidades atendidas">
+        <span>Sabinópolis</span><span>Guanhães</span><span>Materlândia</span><span>Rio Vermelho</span>
+      </div>
+    </div>
+
+    <div class="colagem" id="colagem" aria-hidden="true">
+      <figure class="polaroid p1" data-prof="18" style="margin:0"><div class="foto" data-foto="fachada"><div class="vazio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/></svg>foto da fachada</div></div><figcaption>nossa escola</figcaption></figure>
+      <figure class="polaroid p2" data-prof="30" style="margin:0"><div class="foto" data-foto="aula"><div class="vazio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/></svg>alunos em aula</div></div><figcaption>dia a dia</figcaption></figure>
+      <figure class="polaroid p3" data-prof="12" style="margin:0"><div class="foto" data-foto="evento"><div class="vazio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/></svg>evento da escola</div></div><figcaption>turma reunida</figcaption></figure>
+      <div class="nota-mao mao">mais de uma década formando gente
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="faixa" aria-hidden="true">
+  <div class="trilho">
+    <span>Escola parceira Bernoulli</span><span>Ensino Médio</span><span>Professores em formação contínua</span><span>Alunos de toda a região</span><span>Acompanhamento de perto</span>
+    <span>Escola parceira Bernoulli</span><span>Ensino Médio</span><span>Professores em formação contínua</span><span>Alunos de toda a região</span><span>Acompanhamento de perto</span>
+  </div>
+</div>
+
+<section id="escola">
+  <div class="wrap">
+    <div class="numeros sobe">
+      <div class="num"><strong><span data-conta="10">0</span><small>+</small></strong><p>anos de história em Sabinópolis</p><span class="confirmar">ano de fundação</span></div>
+      <div class="num"><strong data-conta="4">0</strong><p>cidades de onde vêm nossos alunos</p><span class="confirmar">número a confirmar</span></div>
+      <div class="num"><strong><span data-conta="120">0</span><small>+</small></strong><p>aprovações em vestibulares e no ENEM</p><span class="confirmar">número a confirmar</span></div>
+      <div class="num"><strong><span data-conta="900">0</span><small>+</small></strong><p>maior nota de redação no ENEM</p><span class="confirmar">número a confirmar</span></div>
+    </div>
+
+    <div class="caderno" style="margin-top: clamp(64px, 9vw, 110px)">
+      <div class="cab">
+        <p class="olho">Por que estudar aqui</p>
+        <h2>Uma escola do tamanho certo para <span class="marca">conhecer cada aluno</span> pelo nome.</h2>
+      </div>
+      <div class="motivos">
+        <article class="motivo sobe">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2"/><path d="M8 7h7M8 11h5"/></svg></div>
+          <h3>Sistema Bernoulli</h3>
+          <p>O mesmo material usado pelas escolas que mais aprovam em Minas, com conteúdo organizado para o ENEM e os vestibulares.</p>
+        </article>
+        <article class="motivo sobe">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 20a6.5 6.5 0 0 0-2.5-5.1"/></svg></div>
+          <h3>Professores próximos</h3>
+          <p>Uma equipe que se atualiza sempre e acompanha o desempenho de cada aluno, com retorno frequente para as famílias.</p>
+        </article>
+        <article class="motivo sobe">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <h3>Mais de uma década de história</h3>
+          <p>Gerações de alunos de Sabinópolis e região passaram por aqui e seguiram para a universidade e para o trabalho.</p>
+        </article>
+        <article class="motivo sobe">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V9l7-5 7 5v12"/><path d="M10 21v-6h4v6"/></svg></div>
+          <h3>Estrutura e equipe</h3>
+          <p>Salas preparadas, equipamentos atualizados e uma equipe de apoio que cuida do dia a dia para o aluno focar no que importa.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="transporte" style="background: var(--papel-2); border-block: 2px solid var(--tinta)">
+  <div class="wrap transp">
+    <div class="mapa sobe">
+      <svg viewBox="0 0 520 440" role="img" aria-labelledby="mapa-t">
+        <title id="mapa-t">Mapa das cidades de onde vêm os alunos da escola</title>
+        <path class="rota" data-rota="rio" d="M250 250 C 262 190, 300 130, 330 70"/>
+        <path class="rota" data-rota="mat" d="M250 250 C 240 220, 228 190, 220 150"/>
+        <path class="rota" data-rota="gua" d="M250 250 C 300 280, 360 320, 420 350"/>
+        <g class="pino" data-cid="rio" tabindex="-1"><circle cx="330" cy="70" r="11"/><text x="350" y="75">Rio Vermelho</text></g>
+        <g class="pino" data-cid="mat" tabindex="-1"><circle cx="220" cy="150" r="11"/><text x="80" y="155">Materlândia</text></g>
+        <g class="pino" data-cid="gua" tabindex="-1"><circle cx="420" cy="350" r="11"/><text x="350" y="390">Guanhães</text></g>
+        <g class="sede"><circle cx="250" cy="250" r="16"/><text x="98" y="294">Sabinópolis</text></g>
+        <text class="legenda" x="30" y="410">mapa ilustrativo</text>
+        <text class="legenda" x="300" y="268">a escola fica aqui</text>
+      </svg>
+    </div>
+    <div>
+      <div class="cab" style="margin-bottom:0">
+        <p class="olho">Alunos de toda a região</p>
+        <h2>Mora fora de Sabinópolis? <span class="marca">Você não está sozinho.</span></h2>
+        <p class="lead">Todo ano, estudantes das cidades vizinhas escolhem a Atual para fazer o Ensino Médio. Toque numa cidade para ver no mapa.</p>
+      </div>
+      <div class="lista-cid" id="lista-cid">
+        <button type="button" data-cid="gua" aria-pressed="false">Guanhães <span>ver no mapa</span></button>
+        <button type="button" data-cid="mat" aria-pressed="false">Materlândia <span>ver no mapa</span></button>
+        <button type="button" data-cid="rio" aria-pressed="false">Rio Vermelho <span>ver no mapa</span></button>
+      </div>
+      <p class="lead" style="margin-top:18px;font-size:1rem">Quer saber como é a rotina de quem vem de fora? Fale com a escola pelo WhatsApp.</p>
+    </div>
+  </div>
+</section>
+
+<section id="descubra">
+  <div class="wrap">
+    <div class="quiz-box sobe">
+      <div class="quiz-lado">
+        <p class="mao" style="color:var(--marca)">três perguntas rápidas</p>
+        <h2>Qual o caminho do seu filho na Atual?</h2>
+        <p>Responda e receba uma mensagem pronta para conversar com a escola pelo WhatsApp.</p>
+        <div class="passos" id="passos"><i class="on"></i><i></i><i></i></div>
+      </div>
+      <div class="quiz-corpo" id="quiz" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section id="fotos" style="padding-top:0">
+  <div class="wrap">
+    <div class="cab">
+      <p class="olho">A escola por dentro</p>
+      <h2>O dia a dia que <span class="marca">não cabe no boletim.</span></h2>
+    </div>
+    <div class="galeria" id="galeria">
+      <figure class="polaroid sobe" style="margin:0"><div class="foto" data-foto="sala"><div class="vazio">foto: sala de aula</div></div><figcaption>sala de aula</figcaption></figure>
+      <figure class="polaroid sobe" style="margin:0"><div class="foto" data-foto="lab"><div class="vazio">foto: laboratório</div></div><figcaption>laboratório</figcaption></figure>
+      <figure class="polaroid sobe" style="margin:0"><div class="foto" data-foto="aulao"><div class="vazio">foto: aulão de redação</div></div><figcaption>aulão de redação</figcaption></figure>
+      <figure class="polaroid sobe" style="margin:0"><div class="foto" data-foto="festa"><div class="vazio">foto: festa ou evento</div></div><figcaption>nossas festas</figcaption></figure>
+      <figure class="polaroid sobe" style="margin:0"><div class="foto" data-foto="equipe"><div class="vazio">foto: professores</div></div><figcaption>nossa equipe</figcaption></figure>
+      <figure class="polaroid sobe" style="margin:0"><div class="foto" data-foto="formatura"><div class="vazio">foto: formatura</div></div><figcaption>formatura</figcaption></figure>
+    </div>
+    <div class="insta">
+      <a class="btn sec" href="https://www.instagram.com/atualensino" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        Siga @atualensino
+      </a>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="cab">
+      <p class="olho">Quem conhece, recomenda</p>
+      <h2>Palavra de quem vive a escola.</h2>
+    </div>
+    <div class="notas">
+      <figure class="post-it sobe" style="margin:0">
+        <blockquote>“Meu filho chegou inseguro e saiu daqui aprovado na federal. Os professores sabiam exatamente onde ele precisava de ajuda.”</blockquote>
+        <cite>Mãe de ex-aluno · Sabinópolis</cite>
+      </figure>
+      <figure class="post-it sobe" style="margin:0">
+        <blockquote>“Venho de Guanhães todo dia e valeu cada viagem. Aqui os professores sabem o nome de todo mundo.”</blockquote>
+        <cite>Aluno do Ensino Médio · Guanhães</cite>
+      </figure>
+      <figure class="post-it sobe" style="margin:0">
+        <blockquote>“O material Bernoulli e os simulados me deixaram pronta para o ENEM.”</blockquote>
+        <cite>Ex-aluna · Materlândia</cite>
+      </figure>
+    </div>
+    <p class="aviso-ex"><span class="confirmar">exemplo</span> Depoimentos ilustrativos. Na versão final entram falas reais de pais e alunos, com autorização.</p>
+  </div>
+</section>
+
+<section class="frase" style="padding-top:0">
+  <div class="wrap">
+    <blockquote>Educação não transforma o mundo. <span class="marca">Educação muda as pessoas.</span> Pessoas transformam o mundo.</blockquote>
+    <cite class="mao">Paulo Freire</cite>
+  </div>
+</section>
+
+<section class="contato" id="contato">
+  <div class="wrap">
+    <div class="cab" style="margin-bottom:0">
+      <p class="olho">Contato</p>
+      <h2>Venha conhecer a escola.</h2>
+      <p class="lead">Agende uma visita, tire dúvidas sobre a matrícula para 2027 ou fale com a coordenação.</p>
+    </div>
+    <div class="canais">
+      <a class="canal" href="https://wa.me/5533999756768?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20agendar%20uma%20visita." target="_blank" rel="noopener">
+        <small>WhatsApp</small><strong>Sanio Martins</strong><span>(33) 99975-6768</span>
+      </a>
+      <a class="canal" href="https://wa.me/5533999196472?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20agendar%20uma%20visita." target="_blank" rel="noopener">
+        <small>WhatsApp</small><strong>Helma</strong><span>(33) 99919-6472</span>
+      </a>
+      <a class="canal" href="https://www.google.com/maps/search/?api=1&amp;query=Rua+Joval+Pinho+Tavares+101+Sabin%C3%B3polis+MG" target="_blank" rel="noopener">
+        <small>Endereço</small><strong>Rua Joval Pinho Tavares, 101</strong><span>Sabinópolis, MG · abrir no mapa</span>
+      </a>
+      <a class="canal" href="https://atualensino.figma.site" target="_blank" rel="noopener">
+        <small>Para alunos</small><strong>Área do aluno</strong><span>Acesse a área do aluno</span>
+      </a>
+      <a class="canal" href="https://www.instagram.com/atualensino" target="_blank" rel="noopener">
+        <small>Instagram</small><strong>@atualensino</strong><span>Fotos e novidades</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© <span id="ano">2026</span> Atual Sistema de Ensino · Rua Joval Pinho Tavares, 101 · Sabinópolis, MG</p>
+    <a class="pineweb" href="https://pine-web-site.pages.dev" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l5 7h-3l4 6h-3l3 5H6l3-5H6l4-6H7z" fill="#2E7D5B"/><rect x="11" y="20" width="2" height="3" fill="#2E7D5B"/></svg>
+      Site feito por PineWeb
+    </a>
+  </div>
+</footer>
+
+<div class="zap" id="zap">
+  <div class="zap-menu" id="zap-menu" hidden>
+    <p>Fale com a escola</p>
+    <a href="https://wa.me/5533999756768?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Atual." target="_blank" rel="noopener">Sanio Martins <span>WhatsApp</span></a>
+    <a href="https://wa.me/5533999196472?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Atual." target="_blank" rel="noopener">Helma <span>WhatsApp</span></a>
+  </div>
+  <button class="zap-btn" id="zap-btn" type="button" aria-expanded="false" aria-controls="zap-menu" aria-label="Falar pelo WhatsApp">
+    <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.6 3.6 0 0 0-1.1 2.7 6.3 6.3 0 0 0 1.3 3.3 14.4 14.4 0 0 0 5.5 4.9c2 .9 2.8 1 3.9.8a3.3 3.3 0 0 0 2.1-1.5 2.7 2.7 0 0 0 .2-1.5c-.1-.2-.3-.3-.6-.4z"/></svg>
+  </button>
+</div>
+
+<script>
+(function () {
+  document.documentElement.classList.add("js");
+  var reduz = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var ZAP = [
+    { nome: "Sanio Martins", num: "5533999756768" },
+    { nome: "Helma", num: "5533999196472" }
+  ];
+
+  // fotos: cada espaço carrega img/<nome>.jpg sozinho (ex.: img/fachada.jpg).
+  // Para trocar uma foto, basta subir o arquivo com o mesmo nome na pasta img/.
+  document.querySelectorAll("[data-foto]").forEach(function (el) {
+    var src = "img/" + el.dataset.foto + ".jpg", teste = new Image();
+    teste.onload = function () { el.style.setProperty("--img", "url('" + src + "')"); };
+    teste.src = src;
+  });
+
+  document.getElementById("ano").textContent = new Date().getFullYear();
+
+  // palavra que troca no título
+  var palavras = ["transforma", "aprova", "acolhe", "inspira"], i = 0, rot = document.getElementById("rot");
+  if (!reduz) setInterval(function () {
+    i = (i + 1) % palavras.length;
+    rot.style.backgroundSize = "0% 62%";
+    setTimeout(function () {
+      rot.textContent = palavras[i];
+      rot.style.transition = "background-size .5s cubic-bezier(.65,0,.35,1)";
+      rot.style.backgroundSize = "100% 62%";
+    }, 260);
+  }, 2600);
+
+  // barra de progresso
+  var barra = document.getElementById("progresso");
+  addEventListener("scroll", function () {
+    var h = document.documentElement.scrollHeight - innerHeight;
+    barra.style.width = (h > 0 ? scrollY / h * 100 : 0) + "%";
+  }, { passive: true });
+
+  // colagem acompanha o mouse
+  var col = document.getElementById("colagem");
+  if (!reduz && matchMedia("(pointer: fine)").matches) {
+    col.parentElement.addEventListener("mousemove", function (e) {
+      var r = col.getBoundingClientRect();
+      var x = (e.clientX - r.left - r.width / 2) / r.width, y = (e.clientY - r.top - r.height / 2) / r.height;
+      col.querySelectorAll(".polaroid").forEach(function (p) {
+        var k = +p.dataset.prof;
+        p.style.transform = "translate(" + (x * k) + "px," + (y * k) + "px) rotate(var(--r))";
+      });
+    });
+  }
+
+  // contadores e entrada
+  function conta(el) {
+    var alvo = +el.dataset.conta, t0 = null;
+    if (reduz) { el.textContent = alvo; return; }
+    function passo(t) {
+      if (!t0) t0 = t;
+      var p = Math.min((t - t0) / 1400, 1);
+      el.textContent = Math.round(alvo * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(passo);
+    }
+    requestAnimationFrame(passo);
+  }
+  var contadores = document.querySelectorAll("[data-conta]");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("visto");
+        e.target.querySelectorAll("[data-conta]").forEach(conta);
+        if (e.target.dataset.conta) conta(e.target);
+        io.unobserve(e.target);
+      });
+    }, { threshold: .15 });
+    document.querySelectorAll(".sobe").forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll(".sobe").forEach(function (el) { el.classList.add("visto"); });
+    contadores.forEach(conta);
+  }
+  // fallback: nada fica fora do lugar se o observer não disparar
+  setTimeout(function () {
+    document.querySelectorAll(".sobe:not(.visto)").forEach(function (el) {
+      if (el.getBoundingClientRect().top < innerHeight) { el.classList.add("visto"); el.querySelectorAll("[data-conta]").forEach(conta); }
+    });
+  }, 1500);
+
+  // mapa do transporte
+  var botoes = document.querySelectorAll("#lista-cid button");
+  function mostra(cid) {
+    document.querySelectorAll(".rota").forEach(function (r) { r.classList.toggle("on", r.dataset.rota === cid); });
+    document.querySelectorAll(".pino").forEach(function (p) { p.classList.toggle("on", p.dataset.cid === cid); });
+    botoes.forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.cid === cid); });
+  }
+  botoes.forEach(function (b) { b.addEventListener("click", function () { mostra(b.dataset.cid); }); });
+  document.querySelectorAll(".pino").forEach(function (p) { p.addEventListener("click", function () { mostra(p.dataset.cid); }); });
+  mostra("gua");
+
+  // quiz
+  var PERGUNTAS = [
+    { chave: "fase", titulo: "Em que fase está seu filho ou filha?", ops: [
+      ["Terminando o 9º ano", "vai começar o Ensino Médio"],
+      ["No Ensino Médio", "1º, 2º ou 3º ano"],
+      ["Focado no ENEM", "quer entrar na faculdade"],
+      ["Outra série", "quero saber o que a escola oferece"] ] },
+    { chave: "prioridade", titulo: "O que mais pesa na escolha da escola?", ops: [
+      ["Aprovação", "ENEM e vestibulares"],
+      ["Acompanhamento", "professores perto do aluno"],
+      ["Distância", "moramos em outra cidade"],
+      ["Estrutura", "salas, materiais e segurança"] ] },
+    { chave: "cidade", titulo: "Onde vocês moram?", ops: [
+      ["Sabinópolis", ""], ["Guanhães", ""], ["Materlândia", ""], ["Rio Vermelho", ""] ] }
+  ];
+  var TEXTOS = {
+    "Aprovação": "O material Bernoulli e os simulados preparam para o ENEM e os vestibulares desde o 1º ano.",
+    "Acompanhamento": "Turmas em que o professor conhece cada aluno e conversa com a família quando algo precisa de atenção.",
+    "Distância": "Muitos alunos vêm das cidades vizinhas e fazem o Ensino Médio inteiro na Atual.",
+    "Estrutura": "Salas preparadas, equipamentos atualizados e uma equipe que cuida do dia a dia."
+  };
+  var resp = {}, etapa = 0, quiz = document.getElementById("quiz"), passos = document.querySelectorAll("#passos i");
+  function esc(s) { return s.replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function desenha() {
+    passos.forEach(function (p, k) { p.classList.toggle("on", k <= etapa); });
+    if (etapa < PERGUNTAS.length) {
+      var q = PERGUNTAS[etapa];
+      quiz.innerHTML = '<div class="pergunta"><p class="olho" style="margin-bottom:12px">Pergunta ' + (etapa + 1) + ' de 3</p><h3>' + q.titulo + '</h3><div class="opcoes">' +
+        q.ops.map(function (o) { return '<button type="button" data-v="' + esc(o[0]) + '">' + esc(o[0]) + (o[1] ? '<small>' + esc(o[1]) + '</small>' : '') + '</button>'; }).join("") +
+        '</div>' + (etapa ? '<p style="margin-top:18px"><button type="button" class="voltar" data-voltar>Voltar</button></p>' : '') + '</div>';
+      return;
+    }
+    var transporte = resp.cidade !== "Sabinópolis"
+      ? "<p>Vocês não estariam sozinhos: a Atual recebe alunos de " + esc(resp.cidade) + " e de outras cidades da região.</p>" : "";
+    var msg = "Olá! Vim pelo site da Atual. Meu filho(a) está: " + resp.fase + ". Moramos em " + resp.cidade + " e o que mais pesa para nós é: " + resp.prioridade.toLowerCase() + ". Gostaria de agendar uma visita.";
+    quiz.innerHTML = '<div class="resultado"><p class="olho">Seu caminho na Atual</p>' +
+      '<div class="cartao"><p class="mao" style="color:var(--tinta)">' + esc(resp.fase) + ' · ' + esc(resp.cidade) + '</p><p>' + TEXTOS[resp.prioridade] + '</p>' + transporte + '</div>' +
+      '<div class="acoes">' + ZAP.map(function (z, k) {
+        return '<a class="btn' + (k ? ' sec' : '') + '" href="https://wa.me/' + z.num + '?text=' + encodeURIComponent(msg) + '" target="_blank" rel="noopener">Enviar para ' + z.nome.split(" ")[0] + '</a>';
+      }).join("") + '</div><p><button type="button" class="voltar" data-reinicia>Responder de novo</button></p></div>';
+  }
+  quiz.addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    if (b.hasAttribute("data-voltar")) { etapa--; }
+    else if (b.hasAttribute("data-reinicia")) { etapa = 0; resp = {}; }
+    else if (b.dataset.v) { resp[PERGUNTAS[etapa].chave] = b.dataset.v; etapa++; }
+    desenha();
+    var f = quiz.querySelector("button"); if (f && e.detail === 0) f.focus();
+  });
+  desenha();
+
+  // whatsapp flutuante
+  var zb = document.getElementById("zap-btn"), zm = document.getElementById("zap-menu");
+  zb.addEventListener("click", function () { zm.hidden = !zm.hidden; zb.setAttribute("aria-expanded", !zm.hidden); });
+  document.addEventListener("click", function (e) { if (!e.target.closest("#zap")) { zm.hidden = true; zb.setAttribute("aria-expanded", "false"); } });
+})();
+</script>
+</body>
+</html>
