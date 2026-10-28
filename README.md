@@ -21,3 +21,5 @@ Suba a foto na pasta `img/` com o nome exato abaixo (formato `.jpg`, de preferê
 ## Números e depoimentos a confirmar
 
 Os números (anos de história, cidades, aprovações, nota de redação) e os três depoimentos são exemplos marcados na página. Trocar pelos dados reais da escola antes de divulgar.
+
+Site feito por [Fellipe Pinho](https://github.com/felliperobertopinhopires-tech) · PineWeb
