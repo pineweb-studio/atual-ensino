@@ -16,7 +16,7 @@ Suba a foto na pasta `img/` com o nome exato abaixo (formato `.jpg`, de preferê
 | `img/aulao.jpg` | Galeria, feira de profissões |
 | `img/festa.jpg` | Galeria, arraiá |
 | `img/equipe.jpg` | Galeria, professores |
-| `img/formatura.jpg` | Galeria, turma do ano |
+| `img/formatura.jpg` | Galeria, festa das cores |
 
 ## Números e depoimentos a confirmar
 
