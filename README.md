@@ -11,12 +11,12 @@ Suba a foto na pasta `img/` com o nome exato abaixo (formato `.jpg`, de preferê
 | `img/fachada.jpg` | Topo, foto da fachada |
 | `img/aula.jpg` | Topo, alunos em aula |
 | `img/evento.jpg` | Topo, evento da escola |
-| `img/sala.jpg` | Galeria, sala de aula |
-| `img/lab.jpg` | Galeria, laboratório ou aula prática |
-| `img/aulao.jpg` | Galeria, aulão de redação |
-| `img/festa.jpg` | Galeria, festa ou evento |
+| `img/sala.jpg` | Galeria, roda de debate |
+| `img/lab.jpg` | Galeria, mostra de ciências |
+| `img/aulao.jpg` | Galeria, feira de profissões |
+| `img/festa.jpg` | Galeria, arraiá |
 | `img/equipe.jpg` | Galeria, professores |
-| `img/formatura.jpg` | Galeria, formatura |
+| `img/formatura.jpg` | Galeria, turma do ano |
 
 ## Números e depoimentos a confirmar
 
